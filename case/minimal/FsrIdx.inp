@@ -1,0 +1,15 @@
+
+
+! MATERIAL_BLOCK
+ INPUT_MATorXSs 1
+ INPUT_XSs_MATorFSR 1
+ Num_Group   26
+ IfSetXSsForEveryFSR 1
+ reCalcTotalXS 0
+ reCalcAbsorbXS 0
+ transportCorrection 0
+ Num_of_XSsTypes_FSR 610
+ Num_of_ScattOrder 1
+ FSR_XS_File_List 1
+ fsrCgXs.csr
+ 

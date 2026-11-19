@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the accompanying publication and this repository."
+title: "ALPHA GPU-MOC Transport Reproducibility Package"
+type: software
+authors:
+  - name: CaoWei
+    affiliation: "ALPHA Reactor Team, Zhejiang Institute of Modern Physics, School of Physics, Zhejiang University, Hangzhou, China"
+version: "0.1.0"
+date-released: 2026-09-17
+license: MIT
+abstract: >-
+  A transport-only CUDA implementation and benchmark case from ALPHA,
+  the Advanced Lattice Physics code based on Heterogeneous Architecture,
+  for reproducing two-dimensional GPU method-of-characteristics transport
+  calculations with high-order scattering-source paths 13--16, optional
+  FSR clustering, and full-angle or per-azimuth sweeping.
+keywords:
+  - neutron transport
+  - method of characteristics
+  - GPU computing
+  - CUDA
+  - high-order scattering source
+  - FSR clustering
+  - reactor physics

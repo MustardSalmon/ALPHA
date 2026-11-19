@@ -1,0 +1,158 @@
+
+! CASEID
+CASEID_BLOCK
+  CASEID  EMPIRE-2D-ASSEMBLY
+
+  UseTrackFile  1		! 0-no, 1-yes
+  TrackFileName GeomInfo.trk
+
+  If_Resonance 0
+  ProblemType  0		! 0--eigenvalue problem, 1--fixed source problem
+
+MATERIAL_BLOCK
+ FsrIdx.inp
+
+OPTION_BLOCK
+! Boundary Condition
+! 0-VACUUM, 1-REFLECTIVE, 2-PERIODIC, 3-BOUNDARY_NONE, 4-EXTRAPOLATION, 5-ZERO_SURFACE_FLUX
+! WestBC  NorthBC  EastBC  SouthBC  TopBC  BottomBC
+  BC  1 1 1 1 1  1
+
+
+! moc solver <solverType>
+  MOC_SOLVER      	1		! 0-gauss seidel method, 1-jacobian method
+! MOC solver information
+! Maximum number of iteration
+! IterationLimit <NOuterMax> <NGSweep> <MaxNumInnerIter>f
+  MOC_ITER_LIM    3000   1       1		! ITER_LIM Card
+! ConvergenceCriteria <ECritK> <ECritPhi>
+  MOC_CONV_CRIT      1.e-7  1.e-6		! CONV_CRIT Card
+  MOCFluxErrLInf     0
+  MOCFluxErrL2       0
+  MOCFluxErrRMSE     1
+  MOC_TRANS_CORRE_SOR 1
+! Ray Card
+  NumPolarAnglePartition 1
+  NumGroupBoundPerPolarAngPart  1
+! <PolQuadType> 0-TYPolarQuad, 1-LeonardPolarQuad,2-GLPolarQuad, 3-EqualWeightPolarQuad, 4-EqualAnglePolarQuad
+! RayTracing <Spacing> <NumAzimuAng> <PolQuadType> <OrderTheta> <GroupBound> <PolarBound> <FSRVolCorrType>
+  RAY_PARA        0.03       56               0            3          26         3             0
+! whether or not to use a linear exponential table when evaluating the exponentials in the moc equations
+! linear_exp
+  EXP      1		! 0-intrinsic exp(x) function, 1-linear exponential table
+  CheckExpInteRange  0
+! K-reference
+  KType  1		!0--k inf, 1--k eff
+  Ref_K  1.19631
+
+
+! CMFD  info     <MG>  <CG>
+!  CMFD_Flag       1     0		! 1--on, 0--off
+! Linear system solver: 0-jacobi, 1-sor, 2-pgmres, 3-zyq
+!                <MG>  <CG>
+  LinearSolver    1     1
+!                <MG>  <CG>
+  CMFD_ITER_LIM   500   100
+  LS_ITER_LIM     100   50
+  Damp_Factor     0.95   1.0
+! ConvergenceCriteria
+! CMFD solver criteria
+  CMFD_CONV_CRIT
+!          <MG>  <CG>
+  epsEig       5.e-7  5e-7
+  epsFlux      5.e-6  5e-6
+  fluxErrLInf  0     0
+  fluxErrL2    0     0
+  fluxErrRMSE  1     1
+!                    <MG>  <CG>
+  LS_CONV_CRIT       1.e-6 5.e-6
+! SOR Parameter
+  SOR_FACTOR         1.2   1.2
+! GMRES Parameter for solver=2
+!            <MG>  <CG>
+  KrylovDim   1     1
+  Precond     1     1
+! CMFD group info
+  CMFD_NumGroups     47
+! the group uper limit need to be condensited relative to original group structure
+  CMFD_GroupBound     0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19
+                     20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39
+                     40 41 42 43 44 45 46 47
+!  CMFD_GroupBound    0 1 2
+!  CMFD_GroupBound    0 1
+! info for two-level cmfd
+  CMFD_NumCoarseGroups  2
+  CMFD_CoarseGroupBound
+  0 26 47
+
+
+
+! Parallel
+! Number of Processes along x, y and z direction
+! Num_Procs_X  Num_Procs_Y  Num_Procs_Z
+!  1  1  1		! 1-proc
+  1 1  1
+!  1  1  1
+
+! Processes ID Map - 2D
+! 1  2   3  4
+! Hardware ID in Map - 2D, -1-no set hardware, 0-cpu, 1-gpu
+!  0 1
+ 1
+! 1 1
+! 1 1
+
+! number of cells in each process along x, y and z direction
+  1 1 1	! 1-proc
+!  1 1 1
+
+OUTPUT_BLOCK
+! input information
+  Output_inputInfo         0		! output the input information
+  Output_XSsLibInfo        0		! output the corss-section libarary's information
+! geometry information
+  Output_GeometryInfo      0		! output the cell based ray tracing module information
+! MacroXSs information
+  Output_MacroXSs          0		! output the macroscopic cross sections' information
+! results
+  Output_eigenvalue        0		! output the eigenvalue of the problem
+  Output_normPinPower      0		! output the normalized pin power
+!  PinPowerSum
+  PinPowerSumNumSet    1
+  PinPowerSumLayBound  0 1
+  Output_flux              0		! output the relative neutron flux of FSRs
+  Output_flux_mat          0
+! Memory footprint
+  Output_memoryFootprint   0		! output the memory footprint change in stact
+! CMFD related
+  OUTPUT_CMFDGroupConstant 0		! output the group consitant generated for CMFD calculation
+!                                     based on the solution of 2D MOC
+  OUTPUT_CoarseMesh_GroupConstant 0
+! generate visualization file
+  Gene_VisualFile          0
+
+
+
+! number of threads per MPI process
+  NumOMPThread             1
+! CPU transport sweep function set
+  CPU_TSFunctionType       0
+  CPU_FixSourSolver        0
+! 0 Jacobi_MOCSolver_2D_expTab_recExp
+! 1 Jacobi_MOCSolver_2D_diam_expTable
+! 2 Jacobi_MOCSolver_2D_expFunc_recExp
+
+
+! number of stream
+  GPUNumStreams            3
+! set the block dimension 
+  GPUBlockDim             128
+! number of GPUs per node
+  NumGPUsPerNode           4
+! set GPU transport solver type
+  GPU_TSKernelType        1
+  GPU_FixSourSolver       1
+! 0 ExpInte
+! 1 ExpFunc
+! 2 DDExpInte
+! 3 DDExpFunc
