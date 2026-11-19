@@ -20,6 +20,7 @@ School of Physics, Zhejiang University, Hangzhou, China.
 | Development | ALPHA Reactor Team, Zhejiang Institute of Modern Physics, School of Physics, Zhejiang University, Hangzhou, China |
 | Supported platforms of ALPHA | Windows and Linux |
 | Reference build environment | Linux, CMake, CUDA Toolkit, and a CUDA-compatible C/C++ compiler |
+| Repository | [github.com/MustardSalmon/ALPHA](https://github.com/MustardSalmon/ALPHA) |
 
 The present repository is a CUDA transport-only snapshot. Its provided
 shell scripts and documented benchmark workflow target Linux; the full
@@ -57,7 +58,7 @@ Its main characteristics are:
 | Energy groups | 26 |
 | FSRs | 610 |
 | Scattering order | P1 |
-| Azimuthal directions | 56 |
+| Azimuthal directions | 48 |
 | Polar quadrature order | 3 |
 | Precision | FP32 |
 | Track data | Pre-generated |
@@ -77,6 +78,16 @@ case/minimal/fsrCgXs.csr
 ```
 
 Generated output files are ignored by Git and are not required as input data.
+
+## Access to the 2165-group benchmark
+
+The repository includes only the minimal benchmark case described above.
+The 2165-group benchmark is not included because its FSR-wise
+multigroup cross-section files are too large to be uploaded to GitHub
+under the repository's file-size constraints. The complete 2165-group
+input data can be provided upon reasonable request. Researchers who need
+these data for validation should contact Cao Wei at
+`1031090394@qq.com`.
 
 ## Repository layout
 

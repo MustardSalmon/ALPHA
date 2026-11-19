@@ -8,6 +8,7 @@ authors:
 version: "0.1.0"
 date-released: 2026-09-17
 license: MIT
+repository-code: "https://github.com/MustardSalmon/ALPHA"
 abstract: >-
   A transport-only CUDA implementation and benchmark case from ALPHA,
   the Advanced Lattice Physics code based on Heterogeneous Architecture,
